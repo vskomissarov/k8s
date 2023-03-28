@@ -1,0 +1,45 @@
+#spring:
+#  application:
+#    name: microservice-customer
+#
+#  data:
+#    mongodb:
+#      uri: mongodb+srv://mkmongouser:Secret_Password@cluster0.yu4x6.mongodb.net
+#      database: customer
+
+spring:
+  application:
+    name: microservice-customer
+
+  devtools:
+    restart:
+      enabled: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: customer
+
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /customer
+
+server:
+  port: 8081
+  servlet:
+    context-path: /customer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, info, metrics
+
+    health:
+      show-details: always
+
+  metrics:
+    tags:
+      application: MonitoringCustomerMicroservice
+
+

@@ -1,0 +1,25 @@
+feign:
+  order:
+    basePath: http://localhost:8081
+    customersUrl: /customer-orders
+
+
+spring:
+  application:
+    name: order-service
+    microservice-customer:
+      url: http://localhost:8081/customer/api/v1/
+
+  devtools:
+    restart:
+      enabled: true
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: order
+
+server:
+  port: 8080
+  servlet:
+    context-path: /order
