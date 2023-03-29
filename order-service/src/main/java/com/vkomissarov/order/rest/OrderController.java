@@ -27,7 +27,7 @@ public class OrderController {
 
     @PostMapping("/orders")
     public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody OrderDto order) throws URISyntaxException {
-        log.debug("REST request to save Order : {}", order);
+        log.info("REST request to save Order : {}", order);
 
         var result = orderService.createOrder(order);
 
@@ -41,7 +41,7 @@ public class OrderController {
 
     @PutMapping("/orders")
     public ResponseEntity<OrderDto> updateOrder(@javax.validation.Valid @RequestBody OrderDto order) throws URISyntaxException {
-        log.debug("REST request to update Order : {}", order);
+        log.info("REST request to update Order : {}", order);
         return orderService.updateOrder(order);
     }
 
@@ -52,7 +52,7 @@ public class OrderController {
      */
     @GetMapping("/orders")
     public Page<OrderDto> findAll(Pageable pageable) {
-        log.debug("REST request to get all Orders");
+        log.info("REST request to get all Orders");
         return orderService.findAll(pageable);
     }
 
@@ -64,7 +64,7 @@ public class OrderController {
      */
     @GetMapping("/orders/{id}")
     public ResponseEntity<OrderDto> getById(@PathVariable String id) {
-        log.debug("REST request to get Order : {}", id);
+        log.info("REST request to get Order : {}", id);
         return orderService.getById(id);
     }
 
@@ -76,7 +76,7 @@ public class OrderController {
      */
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
-        log.debug("REST request to delete Order : {}", id);
+        log.info("REST request to delete Order : {}", id);
         return orderService.delete(id);
     }
 }

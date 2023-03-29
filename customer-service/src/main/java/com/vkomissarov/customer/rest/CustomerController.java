@@ -27,7 +27,7 @@ public class CustomerController {
      */
     @PostMapping("/customers")
     public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerDto customer) throws URISyntaxException {
-        log.debug("REST request to save Customer : {}", customer);
+        log.info("REST request to save Customer : {}", customer);
 
         return customerService.save(customer);
     }
@@ -40,7 +40,7 @@ public class CustomerController {
      */
     @PutMapping("/customers")
     public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customer) throws URISyntaxException {
-        log.debug("REST request to update Customer : {}", customer);
+        log.info("REST request to update Customer : {}", customer);
         return customerService.save(customer);
     }
 
@@ -50,7 +50,7 @@ public class CustomerController {
      */
     @GetMapping("/customers")
     public List<CustomerDto> getAllCustomers() {
-        log.debug("REST request to get all Customers");
+        log.info("REST request to get all Customers");
 
         return customerService.findAll();
     }
@@ -63,7 +63,7 @@ public class CustomerController {
      */
     @GetMapping("/customers/{id}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable String id) {
-        log.debug("REST request to get Customer : {}", id);
+        log.info("REST request to get Customer : {}", id);
 
         return customerService.findById(id);
     }
@@ -76,7 +76,7 @@ public class CustomerController {
      */
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable String id) {
-        log.debug("REST request to delete Customer : {}", id);
+        log.info("REST request to delete Customer : {}", id);
 
         return customerService.deleteById(id);
     }

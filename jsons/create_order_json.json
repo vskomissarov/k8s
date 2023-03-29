@@ -1,0 +1,29 @@
+{
+  "id": "",
+  "customerId": "6423f8ab07443c687b514ddf",
+  "status": "CREATED",
+  "paymentStatus": false,
+  "paymentMethod": "CREDIT_CARD",
+  "paymentDetails": "paymentDetails",
+  "shippingAddress": {
+    "streetName": "streetName",
+    "streetNumber": "streetNumber",
+    "additionalInfo": "additionalInfo",
+    "zipCode": "zipCode",
+    "city": "city",
+    "state": "state",
+    "country": "country"
+  },
+  "products": [
+    {
+      "id": "",
+      "name": "name",
+      "description": "description",
+      "modelNumber": "modelNumber",
+      "manufacturerName": "manufacturerName",
+      "price": 0.0,
+      "detailInfo": "detailInfo",
+      "imageUrl": "imageUrl",
+      "quantity": 0
+    }]
+}

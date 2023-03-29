@@ -1,5 +1,6 @@
 package com.vkomissarov.order.service.listener;
 
+import com.vkomissarov.order.data.Address;
 import com.vkomissarov.order.data.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -15,10 +16,13 @@ public class OrderListener implements BeforeConvertCallback<Order> {
     @Override
     public Order onBeforeConvert(Order entity, String collection) {
         log.info("entity.getStatus() = " + entity.getStatus());
-        entity.getProducts().forEach(product -> {
-        });
-        if (Objects.isNull(entity.getShippingAddress().getId())) {
-            entity.getShippingAddress().setId(new ObjectId().toString());
+//        entity.getProducts().forEach(product -> {
+//        });
+
+        if (!Objects.isNull(entity.getShippingAddress())) {
+            Address address = new Address();
+            address.setId(new ObjectId().toString());
+            entity.setShippingAddress(address);
         }
         return entity;
     }

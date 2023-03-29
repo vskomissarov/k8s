@@ -22,7 +22,7 @@ public class CustomerSender {
 
     public void postOrder(Order order) {
         try {
-            var orderResponse = orderClient.createOrder(orderMapper.toDto(order));
+            var orderResponse = orderClient.createOrder(orderMapper.toDto(order), order.getCustomerId());
             if (orderResponse.getStatusCode().isError()) {
                 log.error("For Order ID: {}, error response: {} is received to create Order in Customer Microservice",
                         order.getId(), orderResponse.getStatusCode());

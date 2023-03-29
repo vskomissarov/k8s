@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "CustomerClient", url = "${spring.application.microservice-customer.url}")
 public interface CustomerClient {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/customer-orders")
-    ResponseEntity<OrderDto> createOrder(OrderDto dto);
+    @RequestMapping(method = RequestMethod.POST, value = "/customer-orders/{customerId}")
+    ResponseEntity<OrderDto> createOrder(OrderDto dto,  @PathVariable("customerId") String customerId);
 
     @RequestMapping(method = RequestMethod.POST, value = "/customer-orders/{id}")
     ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto dto, @PathVariable("id") String id);

@@ -17,7 +17,7 @@ public class HealthController {
             value = "/health",
             produces = "application/json")
     public ResponseEntity<Health> getHealth() {
-        log.debug("REST request to get the Health Status");
+        log.info("REST request to get the Health Status");
         final var health = new Health();
         health.setStatus(HealthStatus.UP);
         return ResponseEntity.ok().body(health);
