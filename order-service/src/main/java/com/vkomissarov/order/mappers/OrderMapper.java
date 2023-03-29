@@ -4,6 +4,7 @@ import com.vkomissarov.order.data.Order;
 import com.vkomissarov.order.dto.OrderDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = {AddressMapper.class, ProductMapper.class})
 public interface OrderMapper {
@@ -24,4 +25,6 @@ public interface OrderMapper {
     @Mapping(target="paymentMethod", source="paymentMethod")
     @Mapping(target="paymentDetails", source="paymentDetails")
     OrderDto toDto(Order entity);
+
+    void updateCustomerFromDto(OrderDto dto, @MappingTarget Order order);
 }

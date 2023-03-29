@@ -20,6 +20,7 @@ import com.vkomissarov.order.service.sender.CustomerSender;
 import com.vkomissarov.order.utils.StringConstants;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,7 +46,11 @@ public class OrderService {
         if (dto.getId() == null) {
             throw new BadRequestAlertException("Invalid id ", StringConstants.ENTITY_ORDER_NAME, " id is null");
         }
-        final var order = orderRepository.save(orderMapper.toEntity(dto));
+        var order = orderRepository.findById(dto.getId())
+                .orElseThrow(() -> new EntityNotFoundException(Order.class, dto.getId()));
+
+        orderMapper.updateCustomerFromDto(dto, order);
+        orderRepository.save(order);
         customerSender.putOrder(order);
         return ResponseEntity.ok().body(orderMapper.toDto(order));
     }
@@ -80,7 +85,7 @@ public class OrderService {
     public ResponseEntity<Void> delete(String id) {
         orderRepository.findById(id)
                 .ifPresent(order -> {
-                    customerSender.deleteOrder(id);
+                    customerSender.deleteOrder(order.getCustomerId(), order.getId());
                     orderRepository.deleteById(id);
                 });
 

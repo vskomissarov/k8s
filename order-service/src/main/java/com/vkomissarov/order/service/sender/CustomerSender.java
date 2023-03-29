@@ -10,6 +10,7 @@ import com.vkomissarov.order.config.AppPropertiesConfig;
 import com.vkomissarov.order.data.Order;
 import com.vkomissarov.order.exceptions.CustomerOrderException;
 import com.vkomissarov.order.service.feign.CustomerClient;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class CustomerSender {
     public void putOrder(Order order) {
         try {
             log.info("Order Request URL: {}", config.getOrderUrl() + config.getCustomersUrl() + order.getCustomerId());
-            orderClient.updateOrder(orderMapper.toDto(order), order.getId());
+            orderClient.updateOrder(orderMapper.toDto(order), order.getCustomerId());
         } catch (Exception e) {
             log.error("For Order ID: {}, cannot update Order in Customer Microservice for reason: {}",
                     order.getId(), ExceptionUtils.getRootCauseMessage(e));
@@ -49,14 +50,15 @@ public class CustomerSender {
         }
     }
 
-    public void deleteOrder(String id) {
+    public void deleteOrder(String customerId, @PathVariable String orderId) {
         try {
-            log.info("Order Request URL: {}", config.getOrderUrl() + config.getCustomersUrl() + id);
-            orderClient.deleteOrder(id);
+            log.info("Order Request URL: {}", config.getOrderUrl() + config.getCustomersUrl() +
+                    "/" + customerId + "/" + orderId);
+            orderClient.deleteOrder(customerId, orderId);
         } catch (Exception e) {
             log.error("For Order ID: {}, cannot delete Order in Customer Microservice for reason: {}",
-                    id, ExceptionUtils.getRootCauseMessage(e));
-            throw new CustomerOrderException(id, ExceptionUtils.getRootCauseMessage(e));
+                    orderId, ExceptionUtils.getRootCauseMessage(e));
+            throw new CustomerOrderException(orderId, ExceptionUtils.getRootCauseMessage(e));
         }
     }
 }

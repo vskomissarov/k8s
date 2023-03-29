@@ -14,9 +14,9 @@ public interface CustomerClient {
     @RequestMapping(method = RequestMethod.POST, value = "/customer-orders/{customerId}")
     ResponseEntity<OrderDto> createOrder(OrderDto dto,  @PathVariable("customerId") String customerId);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/customer-orders/{id}")
-    ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto dto, @PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/customer-orders/{customerId}")
+    ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto dto, @PathVariable("customerId") String id);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/customer-orders/{id}")
-    void deleteOrder(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/customer-orders/{customerId}/{orderId}")
+    void deleteOrder(@PathVariable String customerId, @PathVariable String orderId);
 }
